@@ -1,59 +1,40 @@
-# 每日早安推送给别人家的女朋友
+# 效果预览
+![](https://s2.loli.net/2022/09/15/TUqGFJmdPNS8lCk.png)
+# 使用步骤
+## 1、申请微信公众号测试账号
+[点击这里](https://mp.weixin.qq.com/debug/cgi-bin/sandbox?t=sandbox/login)  
+**注意** 登录完成后，需要刷新一次，这样得到的`app_secret`才是正确的
 
-首发在小红书，但是有大家说字看不清，因此在这里搞一篇使用说明。
+## 2、Fork本项目
+点击右上角的Fork按钮，将本项目Fork到自己的仓库中
+![](https://s2.loli.net/2022/09/15/6VJYRFtsjieuaE7.png)
 
-> 我一脸懵逼地在小红书新建的群里听说有网友在抖音帮推我这个项目..
->
-> 在此表示十分感谢，因为我懒得做视频。。当时也是一时兴起，所以就只发了小红书。。
->
-> 大家喜欢我的项目我真的十分感谢，不过有朋友说找不到我本人。对于涨粉丝这件事情我还是很感兴趣的。。
 
-*我的小红书昵称==抖音昵称==微博账号==一切社交平台==“纠结当道”*
+## 3、配置Actions密钥
+![](https://s2.loli.net/2022/09/15/fsoHYp5cziLVqyN.png)
 
-并且都是柯南的头像
+### 3.1微信公众号相关的配置
+`APP_ID`和`APP_SECRET`  
+![](https://s2.loli.net/2022/09/15/XizmvNBlZeGqQoW.png)  
+`TEMPLATE_ID` 作用指定发送的消息模板，我使用的是  
+```
+今天天气: {{weather.DATA}} 
+当前温度: {{temperature.DATA}} 
+恋爱の第: {{love_days.DATA}} 天 
+距离她的生日还有: {{birthday_left.DATA}} 天 
+每日一句: {{sentence.DATA}} 
+```
+![](https://s2.loli.net/2022/09/15/PjWvUgl6TcQhO2y.png)
 
-![WechatIMG1](https://user-images.githubusercontent.com/9566402/185802023-1f28c90a-40e7-446e-8dad-420c83f83e38.jpeg)
-![WechatIMG2](https://user-images.githubusercontent.com/9566402/185802026-ef7c1b99-66a8-4535-a6a4-804677657667.jpeg)
+### 3.2推送内容相关配置
+`BIRTHDAY` 必填，生日，格式是`07-01`  
+`CITY` 必填，天气使用的城市，格式是`广州`  
+`IS_LUNAR_BIRTHDAY` 非必填，默认是否；是否为农历生日，是就写1；不是就写`"`或者不配置  
+`START_DATE` 必填，恋爱纪念日，格式是`2022-09-15`  
+`USER_ID` 必填，接收推送消息用户id  
+![](https://s2.loli.net/2022/09/15/jrERVkZv5PiKYpG.png)
 
----------------------- 以下是正文 ----------------------
-
-在我刚想构思这个教程怎么让不懂编程的朋友很快入门的时候，我考虑到：避免服务器搭建，避免定时任务，避免接触代码。在经历过各种思考后，觉得可以用 Github Actions 来白嫖。。
-
-效果如图。当然，文字是可以修改的。
-![5e72e89fd7ff692a0bfa62010517c0c](https://user-images.githubusercontent.com/9566402/183242263-c93517a2-5377-435d-8386-8d47252c9e07.jpg)
-
-首先，按图搜索，测试号，进来之后微信扫码登录！
-![cf7dbd4502df44765ed3506f55caea5](https://user-images.githubusercontent.com/9566402/183242272-134e37e7-718d-42dd-9ed7-fca2810e94e6.png)
-
-按图点击 Use this template，创建到自己的仓库下！
-![e6581c43572b00b12c1a82ca8d7178b](https://user-images.githubusercontent.com/9566402/183242340-2ef26c63-1ca1-420e-abd4-8672c25d61c9.png)
-
-按下图，创建模板，设置变量，把微信公众平台上的各种字符串按说明创建到 GitHub -> Settings -> Secrets -> Actions 中。
-![71bf9d11a876d23ef0f0728645a8ba0](https://user-images.githubusercontent.com/9566402/183242301-fd6ab30e-bfe5-4245-b2a9-f690184db307.png)
-![381e8ee4a7c5ec6b8c09719f2c7e486](https://user-images.githubusercontent.com/9566402/183242295-4dcf06bb-2083-4883-8745-0af753ca805c.png)
-![48c60750cec7adc546e0ad99e3082b3](https://user-images.githubusercontent.com/9566402/183242320-18500adc-14e5-4522-a3ad-ae19cc4479bf.png)
-
-启用自己项目下的 Action！
-![30a5b1b2b06ba4a40a3d8ef01652409](https://user-images.githubusercontent.com/9566402/183242334-9943c538-ba3d-4d01-8377-d040143b7560.png)
-
-如果运行出现错误，按以下方法可以看到错误，在这里 issue 提问也可以，在小红书群里问也可以
-![6b0da6f44e18c2bfd94910c377d13e6](https://user-images.githubusercontent.com/9566402/183242349-1aa5ada6-2ee7-4cf9-a542-4b2dad88b8fe.png)
-
-启用后可以直接运行，看看女朋友的手机有没有收到推送吧！
-这个定时任务是每天早晨8点推送，如果会编程的同学可以自己自定义一些东西～
-
-图中的操作，除了各种英文字符串不一样，模板消息中的中文不一样，其他的应该都是一样的，不然程序跑不通的～
-
-Github 的右上角可以点击 star 给我点鼓励吧亲
-
-小红书上点点关注，点点赞，有什么好玩的东西可以at我，我来教你们做
-
-ps. 有一些注意事项在此补充
-
-1. 第一次登录微信公众平台测试号给的 app secret 是错误的，刷新一下页面即可
-2. 生日的日期格式是：`05-20`，纪念日的格式是 `2022-08-09`，请注意区分。城市请写到地级市，比如：`北京`，`广州`，`承德`
-3. 变量中粘贴的各种英文字符串不要有空格，不要有换行，除了模板之外都没有换行
-4. Github Actions 的定时任务，在 workflow 的定义是 `0 0 * * *`，是 UTC 时间的零点，北京时间的八点。但是由于 Github 同一时间任务太多，因此会有延迟
-5. 我会偶尔优化一下代码，emm 但现在我自己在做一个完整的平台项目，想让大家更加便捷地上手
-
-但那个平台还没完全做好，我要抑制住我赚钱（不是）的欲望。。
+## 4、定时推送配置
+> 这里crontab的时区是UTC，和中国时区相差8小时
+> 也就说说这里配置0时0点，就是中国时间早上08:00
+![](https://s2.loli.net/2022/09/15/oltPeQXIzgr7vOc.png)
