@@ -170,10 +170,9 @@ def main():
     }
     logger.info(f"发送的消息体: {data=}")
     msg_client: WeChatMessage = get_wx_msg_client(app_id=APP_ID, app_secret=APP_SECRET)
-    send_wechat_message(
+    res: dict = send_wechat_message(
         client=msg_client, user_id=USER_ID, template_id=TEMPLATE_ID, data=data
     )
-    res: dict = msg_client.send_template(USER_ID, TEMPLATE_ID, data)
     logger.info(f"send template message resp, {res=}")
 
 
